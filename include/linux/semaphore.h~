@@ -1,0 +1,21 @@
+#define NR_SEMAPHORE	64
+#define NR_SEMANAME	255
+
+typedef struct semaphore
+{
+	char sem_name[NR_SEMANAME];
+	int value;
+	struct task_struct * semp;
+}sem_t;
+
+sem_t semaphore_list[NR_SEMAPHORE];
+
+/*新建一个信号量*/
+sem_t * sys_sem_open(const char * name, int value);
+/**/
+int sys_sem_wait(sem_t * sem);
+/**/
+int sys_sem_post(sem_t * sem);
+/**/
+int sys_sem_unlink(const char * name);
+int sys_sem_getvalue(sem_t * sem);
